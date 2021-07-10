@@ -11,22 +11,6 @@ export default class Coin extends Component {
         }
         this.handleClick = this.handleClick.bind(this);
     }
-    /*
-    // method to execute different things, including API
-    componentDidMount() {
-        const callback = () => {
-            const randomPercentage = 0.995 + Math.random() * 0.01;
-
-            this.setState(oldState => {
-                return {
-                    price: oldState.price * randomPercentage
-                };
-            });
-
-        }
-        setInterval(callback, 1000)
-    }
-    */
     // handleClick doesn't have access to "this", so in constructor you must bind it! see line 12
     handleClick(event) {
         // clicking button will reload the page, so this is used to prevent that from happening (in forms)
