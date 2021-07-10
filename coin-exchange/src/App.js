@@ -30,6 +30,11 @@ class App extends React.Component {
           ticker: 'XRP',
           price: 0.43,
         },
+        {
+          name: 'Bitcoin Cash',
+          ticker: 'BCH',
+          price: 298.99,
+        },
       ],
     }
   }
@@ -50,26 +55,14 @@ class App extends React.Component {
             </tr>
           </thead>
           <tbody>
-            <Coin
-              name={this.state.coinData[0].name}
-              ticker={this.state.coinData[0].ticker}
-              price={this.state.coinData[0].price}
-            />
-            <Coin
-              name={this.state.coinData[1].name}
-              ticker={this.state.coinData[1].ticker}
-              price={this.state.coinData[1].price}
-            />
-            <Coin
-              name={this.state.coinData[2].name}
-              ticker={this.state.coinData[2].ticker}
-              price={this.state.coinData[2].price}
-            />
-            <Coin
-              name={this.state.coinData[3].name}
-              ticker={this.state.coinData[3].ticker}
-              price={this.state.coinData[3].price}
-            />
+            {this.state.coinData.map((value) => (
+              <Coin
+                key={value.ticker}
+                name={value.name}
+                ticker={value.ticker}
+                price={value.price}
+              />
+            ))}
           </tbody>
         </table>
       </div>
