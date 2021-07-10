@@ -1,6 +1,21 @@
 import React, { Component } from 'react';
-import './Coin.css';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const TD = styled.td`
+    border: 1px solid rgb(45, 58, 79);
+    width: 25vh;
+    box-shadow: 2px 2px 7px 2px darkgray;
+`
+
+const Button = styled.button`
+    background: transparent;
+    border-radius: 5px;
+    border: 2px solid darkturquoise;
+    color: darkturquoise;
+    margin: 0 1em;
+    padding: 0.25em 1em;
+`;
 
 export default class Coin extends Component {
     // this takes the props and adds a state, making it dynamic
@@ -26,14 +41,14 @@ export default class Coin extends Component {
     render() {
         return (
             <tr className="coin-row">
-                <td>{this.props.name}</td>
-                <td>{this.props.ticker}</td>
-                <td>${this.state.price}</td>
-                <td>
+                <TD>{this.props.name}</TD>
+                <TD>{this.props.ticker}</TD>
+                <TD>${this.state.price}</TD>
+                <TD>
                     <form action="#" method="POST">
-                        <button onClick={this.handleClick}>Refresh</button>
+                        <Button onClick={this.handleClick}>Refresh</Button>
                     </form>
-                </td>
+                </TD>
             </tr>
         )
     }
