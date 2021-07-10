@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
-import Coin from './components/Coin/Coin'
+import CoinList from './components/CoinList/CoinList'
 import AccountBalance from './components/AccountBalance/AccountBalance'
 
 class App extends React.Component {
@@ -46,20 +46,7 @@ class App extends React.Component {
           <h1 className="App-title">Coin Exchange</h1>
         </header>
         <AccountBalance amount={this.state.balance} />
-        <table className="coin-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Ticker</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.coinData.map(({ name, ticker, price }) => (
-              <Coin key={ticker} name={name} ticker={ticker} price={price} />
-            ))}
-          </tbody>
-        </table>
+        <CoinList coinData={this.state.coinData} />
       </div>
     )
   }
