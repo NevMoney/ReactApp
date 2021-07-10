@@ -9,29 +9,35 @@ export default class Coin extends Component {
         this.state = {
             price: this.props.price
         }
+        this.handleClick = this.handleClick.bind(this);
     }
+    /*
     // method to execute different things, including API
     componentDidMount() {
         const callback = () => {
-            // set the state to new random value
             const randomPercentage = 0.995 + Math.random() * 0.01;
 
-            // DON'T DO THIS to change state:
-            // this.state.price = this.state.price * randomPercentage;
-
-            // DO THIS to change state:
             this.setState(oldState => {
                 return {
                     price: oldState.price * randomPercentage
                 };
             });
 
-            // OR THIS (oldState.price becomes this.state.price and be used as read-only value)
-            // it is better to go with function, so stick with it(see line 23)
-            // this.setState({price: oldState.price * randomPercentage})
-
         }
-        setInterval{callback, 1000}
+        setInterval(callback, 1000)
+    }
+    */
+    // handleClick doesn't have access to "this", so in constructor you must bind it! see line 12
+    handleClick(event) {
+        // clicking button will reload the page, so this is used to prevent that from happening (in forms)
+        event.preventDefault();
+
+        const randomPercentage = 0.995 + Math.random() * 0.01;
+        this.setState(oldState => {
+            return {
+                price: oldState.price * randomPercentage
+            };
+        });
     }
     render() {
         return (
@@ -39,6 +45,11 @@ export default class Coin extends Component {
                 <td>{this.props.name}</td>
                 <td>{this.props.ticker}</td>
                 <td>${this.state.price}</td>
+                <td>
+                    <form action="#" method="POST">
+                        <button onClick={this.handleClick}>Refresh</button>
+                    </form>
+                </td>
             </tr>
         )
     }
