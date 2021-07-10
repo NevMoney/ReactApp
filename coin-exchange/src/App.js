@@ -55,8 +55,8 @@ class App extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.coinData.map((value) => (
-              <Coin key={value.ticker} {...value} />
+            {this.state.coinData.map(({ name, ticker, price }) => (
+              <Coin key={ticker} name={name} ticker={ticker} price={price} />
             ))}
           </tbody>
         </table>
