@@ -4,31 +4,77 @@ import './App.css'
 import Coin from './components/Coin/Coin'
 import AccountBalance from './components/AccountBalance/AccountBalance'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="App-title">Coin Exchange</h1>
-      </header>
-      <AccountBalance amount={10000} />
-      <table className="coin-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Ticker</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <Coin name="Bitcoin" ticker="BTC" price={35721.51} />
-          <Coin name="Ethereum" ticker="ETH" price={2513.05} />
-          <Coin name="Tether" ticker="USDT" price={1.0} />
-          <Coin name="Ripple" ticker="XRP" price={0.43} />
-        </tbody>
-      </table>
-    </div>
-  )
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      balance: 10000,
+      coinData: [
+        {
+          name: 'Bitcoin',
+          ticker: 'BTC',
+          price: 35721.51,
+        },
+        {
+          name: 'Ethereum',
+          ticker: 'ETH',
+          price: 2513.05,
+        },
+        {
+          name: 'Tether',
+          ticker: 'USDT',
+          price: 1.0,
+        },
+        {
+          name: 'Ripple',
+          ticker: 'XRP',
+          price: 0.43,
+        },
+      ],
+    }
+  }
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Coin Exchange</h1>
+        </header>
+        <AccountBalance amount={this.state.balance} />
+        <table className="coin-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Ticker</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <Coin
+              name={this.state.coinData[0].name}
+              ticker={this.state.coinData[0].ticker}
+              price={this.state.coinData[0].price}
+            />
+            <Coin
+              name={this.state.coinData[1].name}
+              ticker={this.state.coinData[1].ticker}
+              price={this.state.coinData[1].price}
+            />
+            <Coin
+              name={this.state.coinData[2].name}
+              ticker={this.state.coinData[2].ticker}
+              price={this.state.coinData[2].price}
+            />
+            <Coin
+              name={this.state.coinData[3].name}
+              ticker={this.state.coinData[3].ticker}
+              price={this.state.coinData[3].price}
+            />
+          </tbody>
+        </table>
+      </div>
+    )
+  }
 }
 
 export default App

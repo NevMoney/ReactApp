@@ -40,7 +40,7 @@ export default class Coin extends Component {
     }
     render() {
         return (
-            <tr className="coin-row">
+            <tr>
                 <TD>{this.props.name}</TD>
                 <TD>{this.props.ticker}</TD>
                 <TD>${this.state.price}</TD>
