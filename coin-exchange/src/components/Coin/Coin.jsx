@@ -39,7 +39,7 @@ export default class Coin extends Component {
     }
 }
 
-// definint property types for the items we're adding (coins)
+// defining property types for the items we're adding (coins)
 Coin.propTypes = {
     name: PropTypes.string.isRequired,
     ticker: PropTypes.string.isRequired,
