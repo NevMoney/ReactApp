@@ -20,30 +20,21 @@ const Button = styled.button`
 export default class Coin extends Component {
     // this takes the props and adds a state, making it dynamic
     constructor(props) {
-        super(props);
-        this.state = {
-            price: this.props.price
-        }
-        this.handleClick = this.handleClick.bind(this);
+        super(props)
+        this.handleClick = this.handleClick.bind(this)
     }
-    // handleClick doesn't have access to "this", so in constructor you must bind it! see line 12
-    handleClick(event) {
-        // clicking button will reload the page, so this is used to prevent that from happening (in forms)
-        event.preventDefault();
-
-        const randomPercentage = 0.995 + Math.random() * 0.01;
-        this.setState(oldState => {
-            return {
-                price: oldState.price * randomPercentage
-            };
-        });
+    // props come from the parent component: CoinList
+    handleClick = (e) => {
+        e.preventDefault()
+        this.props.handleRefresh(this.props.ticker)
     }
+    
     render() {
         return (
             <tr>
                 <TD>{this.props.name}</TD>
                 <TD>{this.props.ticker}</TD>
-                <TD>${this.state.price}</TD>
+                <TD>${this.props.price}</TD>
                 <TD>
                     <form action="#" method="POST">
                         <Button onClick={this.handleClick}>Refresh</Button>

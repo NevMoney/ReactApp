@@ -7,7 +7,7 @@ const Table = styled.table`
   display: inline-block;
   font-size: 1.4rem;
 `
-
+// the parent of the coinList is App.js
 export default class CoinList extends Component {
     render() {
         return (
@@ -21,7 +21,13 @@ export default class CoinList extends Component {
                 </thead>
                 <tbody>
                     {this.props.coinData.map(({ name, ticker, price }) => (
-                    <Coin key={ticker} name={name} ticker={ticker} price={price} />
+                        <Coin
+                            key={ticker}
+                            handleRefresh={this.props.handleRefresh}
+                            name={name}
+                            ticker={ticker}
+                            price={price}
+                        />
                     ))}
                 </tbody>
             </Table>
