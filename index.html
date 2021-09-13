@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Hello World</title>
@@ -9,7 +9,7 @@
 
     <!-- Don't use this in production: -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <!-- better way to created dependencies -->
+    <!-- better way is to create react app -->
   </head>
   <body>
     <table>
@@ -24,27 +24,6 @@
     </table>
 
     <script type="text/babel">
-      // TO CREATE FUNCTION COMPONENT:
-      //   function Coin(props) {
-      //     return (
-      //       <tr>
-      //         <td>{props.name}</td>
-      //         <td>{props.ticker}</td>
-      //         <td>{props.price}</td>
-      //       </tr>
-      //     )
-      //   }
-
-      // A BETTER WAY TO GET THE FUNCTION (with arrow):
-      //   const Coin = (props) => (
-      //     <tr>
-      //       <td>{props.name}</td>
-      //       <td>{props.ticker}</td>
-      //       <td>{props.price}</td>
-      //     </tr>
-      //   )
-
-      // AN EVEN BETTER WAY:
       const Coin = ({ name, ticker, price }) => (
         <tr>
           <td>{name}</td>
@@ -52,24 +31,6 @@
           <td>{price}</td>
         </tr>
       )
-
-      //  TO CREATE CLASS COMPONENT:
-      //   class Coin extends React.Component {
-      //     // if there is nothing extra to be added, there is no need for the constructor, as seen below:
-      //     // constructor(props) {
-      //     //   super(props)
-      //     // }
-      //     // need rander to return jsx
-      //     render() {
-      //       return (
-      //         <tr>
-      //           <td>{this.props.name}</td>
-      //           <td>{this.props.ticker}</td>
-      //           <td>{this.props.price}</td>
-      //         </tr>
-      //       )
-      //     }
-      //   }
 
       //takes the ID from HTML and renders specific item (in this case h1 to it)
       ReactDOM.render(
@@ -80,18 +41,5 @@
         document.getElementById('root'),
       )
     </script>
-    <!--
-      Note: this page is a great way to try React but it's not suitable for production.
-      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
-
-      Read this section for a production-ready setup with JSX:
-      https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
-
-      In a larger project, you can use an integrated toolchain that includes JSX instead:
-      https://reactjs.org/docs/create-a-new-react-app.html
-
-      You can also use React without JSX, in which case you can remove Babel:
-      https://reactjs.org/docs/react-without-jsx.html
-    -->
   </body>
 </html>

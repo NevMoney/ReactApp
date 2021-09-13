@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const TD = styled.td`
+const Td = styled.td`
     border: 1px solid rgb(45, 58, 79);
     width: 25vh;
     box-shadow: 2px 2px 7px 2px darkgray;
@@ -30,16 +30,18 @@ export default class Coin extends Component {
     }
     
     render() {
+        const balance = this.props.showBalance ? <Td>{this.props.balance}</Td> : null
         return (
             <tr>
-                <TD>{this.props.name}</TD>
-                <TD>{this.props.ticker}</TD>
-                <TD>${this.props.price}</TD>
-                <TD>
+                <Td>{this.props.name}</Td>
+                <Td>{this.props.ticker}</Td>
+                <Td>${this.props.price}</Td>
+                {balance}
+                <Td>
                     <form action="#" method="POST">
                         <Button onClick={this.handleClick}>Refresh</Button>
                     </form>
-                </TD>
+                </Td>
             </tr>
         )
     }
