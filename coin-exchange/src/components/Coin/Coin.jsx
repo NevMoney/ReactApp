@@ -18,11 +18,7 @@ const Button = styled.button`
 `;
 
 export default class Coin extends Component {
-    // this takes the props and adds a state, making it dynamic
-    constructor(props) {
-        super(props)
-        this.handleClick = this.handleClick.bind(this)
-    }
+    
     // props come from the parent component: CoinList
     handleClick = (e) => {
         e.preventDefault()
