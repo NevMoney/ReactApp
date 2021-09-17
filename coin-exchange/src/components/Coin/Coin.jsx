@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -17,30 +17,28 @@ const Button = styled.button`
     padding: 0.25em 1em;
 `;
 
-export default class Coin extends Component {
+export default function Coin(props) {
     
-    // props come from the parent component: CoinList
-    handleClick = (e) => {
+    const handleClick = (e) => {
         e.preventDefault()
-        this.props.handleRefresh(this.props.id)
+        props.handleRefresh(props.id)
     }
     
-    render() {
-        const balance = this.props.showBalance ? <Td>{this.props.balance}</Td> : null
-        return (
-            <tr>
-                <Td>{this.props.name}</Td>
-                <Td>{this.props.ticker}</Td>
-                <Td>${this.props.price}</Td>
-                {balance}
-                <Td>
-                    <form action="#" method="POST">
-                        <Button onClick={this.handleClick}>Refresh</Button>
-                    </form>
-                </Td>
-            </tr>
-        )
-    }
+    const balance = props.showBalance ? <Td>{props.balance}</Td> : null
+    
+    return (
+        <tr>
+            <Td>{props.name}</Td>
+            <Td>{props.ticker}</Td>
+            <Td>${props.price}</Td>
+            {balance}
+            <Td>
+                <form action="#" method="POST">
+                    <Button onClick={handleClick}>Refresh</Button>
+                </form>
+            </Td>
+        </tr>
+    )
 }
 
 // defining property types for the items we're adding (coins)
