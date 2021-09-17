@@ -11,7 +11,7 @@ const Div = styled.div`
 
 const coinDataUrl = 'https://api.coinpaprika.com/v1/coins'
 const coinTickerUrl = 'https://api.coinpaprika.com/v1/tickers/'
-const formatedPrice = (price) => parseFloat(Number(price).toFixed(2))
+const formatedPrice = (price) => parseFloat(Number(price).toFixed(4))
 
 class App extends React.Component {
   state = {
