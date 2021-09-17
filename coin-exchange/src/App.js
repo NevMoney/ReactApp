@@ -11,54 +11,20 @@ const Div = styled.div`
 
 const coinDataUrl = 'https://api.coinpaprika.com/v1/coins'
 const coinTickerUrl = 'https://api.coinpaprika.com/v1/tickers/'
+const formatedPrice = (price) => parseFloat(Number(price).toFixed(2))
 
 class App extends React.Component {
   state = {
     balance: 10000,
     showBalance: true,
-    coinData: [
-      // {
-      //   name: 'Bitcoin',
-      //   ticker: 'BTC',
-      //   balance: 0.35,
-      //   price: 35721.51,
-      // },
-      // {
-      //   name: 'Ethereum',
-      //   ticker: 'ETH',
-      //   balance: 3.759,
-      //   price: 2513.05,
-      // },
-      // {
-      //   name: 'Tether',
-      //   ticker: 'USDT',
-      //   balance: 1000.0,
-      //   price: 1.0,
-      // },
-      // {
-      //   name: 'Ripple',
-      //   ticker: 'XRP',
-      //   balance: 120.0,
-      //   price: 0.43,
-      // },
-      // {
-      //   name: 'Bitcoin Cash',
-      //   ticker: 'BCH',
-      //   balance: 0.0,
-      //   price: 298.99,
-      // },
-    ],
+    coinData: [],
   }
 
   componentDidMount = async () => {
     const res = await axios.get(coinDataUrl)
-    //this will give us the first 10 coins in string
     const coinIds = res.data.slice(0, 10).map((coin) => coin.id)
-    // because it's a string, no need for object {key}, we can have just key
     const promises = coinIds.map((id) => axios.get(coinTickerUrl + id))
-    // returns array of promises
     const cointData = await Promise.all(promises)
-    // change coinData
     const coinPriceData = cointData.map(function (response) {
       const coin = response.data
       return {
@@ -66,24 +32,19 @@ class App extends React.Component {
         name: coin.name,
         ticker: coin.symbol,
         balance: 0,
-        price: parseFloat(Number(coin.quotes.USD.price).toFixed(4)),
+        price: formatedPrice(coin.quotes.USD.price),
       }
     })
-    // when taking the number toFixed(2), it will round to 2 decimal places but as a string
-    // to convert it into a number, use parseFloat(Number(12.32132154).toFixed(2))
-    // retrieve the prices
     this.setState({ coinData: coinPriceData })
   }
 
   handleRefresh = async (changedTickerValue) => {
+    console.log('clicked', changedTickerValue)
     const priceData = await axios.get(coinTickerUrl + changedTickerValue)
     const newCoinData = this.state.coinData.map((values) => {
       let newValues = { ...values }
-      if (changedTickerValue === values.ticker) {
-        // instead of getting the price change statically, we'll get it from the API
-        newValues.price = parseFloat(
-          Number(priceData.data.quotes.USD.price).toFixed(4),
-        )
+      if (changedTickerValue === values.key) {
+        newValues.price = formatedPrice(priceData.data.quotes.USD.price)
       }
       return newValues
     })
