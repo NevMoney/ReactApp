@@ -9,6 +9,9 @@ const Div = styled.div`
   text-align: center;
 `
 
+const coinDataUrl = 'https://api.coinpaprika.com/v1/coins'
+const coinTickerUrl = 'https://api.coinpaprika.com/v1/tickers/'
+
 class App extends React.Component {
   state = {
     balance: 10000,
@@ -48,13 +51,11 @@ class App extends React.Component {
   }
 
   componentDidMount = async () => {
-    const res = await axios.get('https://api.coinpaprika.com/v1/coins')
-
+    const res = await axios.get(coinDataUrl)
     //this will give us the first 10 coins in string
     const coinIds = res.data.slice(0, 10).map((coin) => coin.id)
-    const tickerUrl = 'https://api.coinpaprika.com/v1/tickers/'
     // because it's a string, no need for object {key}, we can have just key
-    const promises = coinIds.map((id) => axios.get(tickerUrl + id))
+    const promises = coinIds.map((id) => axios.get(coinTickerUrl + id))
     // returns array of promises
     const cointData = await Promise.all(promises)
     // change coinData
@@ -74,12 +75,15 @@ class App extends React.Component {
     this.setState({ coinData: coinPriceData })
   }
 
-  handleRefresh = (changedTickerValue) => {
+  handleRefresh = async (changedTickerValue) => {
+    const priceData = await axios.get(coinTickerUrl + changedTickerValue)
     const newCoinData = this.state.coinData.map((values) => {
       let newValues = { ...values }
       if (changedTickerValue === values.ticker) {
-        const randomPercent = 0.995 + Math.random() * 0.01
-        newValues.price *= randomPercent
+        // instead of getting the price change statically, we'll get it from the API
+        newValues.price = parseFloat(
+          Number(priceData.data.quotes.USD.price).toFixed(4),
+        )
       }
       return newValues
     })

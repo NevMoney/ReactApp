@@ -22,7 +22,7 @@ export default class Coin extends Component {
     // props come from the parent component: CoinList
     handleClick = (e) => {
         e.preventDefault()
-        this.props.handleRefresh(this.props.ticker)
+        this.props.handleRefresh(this.props.id)
     }
     
     render() {
@@ -47,5 +47,5 @@ export default class Coin extends Component {
 Coin.propTypes = {
     name: PropTypes.string.isRequired,
     ticker: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired
+    price: PropTypes.number.isRequired,
 }
