@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -26,20 +26,18 @@ const Button = styled.button`
     }
 `
 
-export default class AccountBalance extends Component {
-    render() {
-        const buttonText = this.props.showBalance ? 'Hide Balance' : 'Show Balance'
-        let balance = this.props.showBalance ?
-            <span>Account Balance: ${this.props.amount}</span>
-            : null;
-        
-        return (
-            <Section>
-                {balance}
-                <Button onClick={this.props.handleBalanceVisibility}>{buttonText}</Button>
-            </Section>
-        )
-    }
+export default function AccountBalance (props) {
+    const buttonText = props.showBalance ? 'Hide Balance' : 'Show Balance'
+    let balance = props.showBalance ?
+        <span>Account Balance: ${props.amount}</span>
+        : null;
+    
+    return (
+        <Section>
+            {balance}
+            <Button onClick={props.handleBalanceVisibility}>{buttonText}</Button>
+        </Section>
+    )
 }
 
 AccountBalance.propTypes = {
