@@ -29,7 +29,7 @@ const Button = styled.button`
 export default function AccountBalance (props) {
     const buttonText = props.showBalance ? 'Hide Balance' : 'Show Balance'
     let balance = props.showBalance ?
-        <span>Account Balance: ${props.amount}</span>
+        <span>Cash Balance: ${props.amount}</span>
         : null;
     let helicopterMoney = null
     
