@@ -4,9 +4,22 @@ import styled from 'styled-components';
 
 const Td = styled.td`
     border: 1px solid rgb(45, 58, 79);
-    width: 25vh;
-    box-shadow: 2px 2px 7px 2px darkgray;
+    width: 16vh;
+    box-shadow: 2px 2px 7px 2px lightgray;
 `
+
+const TdAction = styled.td`
+    border: 1px solid rgb(45, 58, 79);
+    width: 34vh;
+    box-shadow: 2px 2px 7px 2px lightgray;
+`
+
+const TdName = styled.td`
+    border: 1px solid rgb(45, 58, 79);
+    width: 24vh;
+    box-shadow: 2px 2px 7px 2px lightgray;
+`
+
 
 const Button = styled.button`
     background: transparent;
@@ -15,28 +28,79 @@ const Button = styled.button`
     color: darkturquoise;
     margin: 0 1em;
     padding: 0.25em 1em;
+    font-size: 0.75em;
+    &:hover {
+        background: darkturquoise;
+        color: white;
+    }
+`;
+
+const BuyButton = styled.button`
+    background: transparent;
+    border-radius: 5px;
+    border: 2px solid limegreen;
+    color: limegreen;
+    margin: 0 1em;
+    padding: 0.25em 1em;
+    font-size: 0.75em;
+    &:hover {
+        background: limegreen;
+        color: white;
+    }
+`;
+
+const SellButton = styled.button`
+    background: transparent;
+    border-radius: 5px;
+    border: 2px solid orangered;
+    color: orangered;
+    margin: 0 1em;
+    padding: 0.25em 1em;
+    font-size: 0.75em;
+    &:hover {
+        background: orangered;
+        color: white;
+    }
 `;
 
 export default function Coin(props) {
     
-    const handleClick = (e) => {
+    const handleRefresh = (e) => {
         e.preventDefault()
         props.handleRefresh(props.id)
     }
+
+    const handleBuy = (e) => {
+        e.preventDefault()
+        props.handleTransaction(true, props.id)
+    }
+
+    const handleSell = (e) => {
+        e.preventDefault()
+        props.handleTransaction(false, props.id)
+    }
     
-    const balance = props.showBalance ? <Td>{props.balance}</Td> : null
+    const balance = <Td>{props.showBalance ? props.balance : '-'}</Td>
     
     return (
         <tr>
-            <Td>{props.name}</Td>
+            <TdName>{props.name}</TdName>
             <Td>{props.ticker}</Td>
             <Td>${props.price}</Td>
             {balance}
-            <Td>
+            <TdAction>
                 <form action="#" method="POST">
-                    <Button onClick={handleClick}>Refresh</Button>
+                    <Button onClick={handleRefresh}>
+                        <i class="fas fa-sync-alt"></i>
+                    </Button>
+                    <BuyButton onClick={handleBuy}>
+                        Buy
+                    </BuyButton>
+                    <SellButton onClick={handleSell}>
+                        Sell
+                    </SellButton>
                 </form>
-            </Td>
+            </TdAction>
         </tr>
     )
 }

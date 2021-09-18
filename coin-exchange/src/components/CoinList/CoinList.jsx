@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Table = styled.table`
   margin: 50px auto 50px auto;
   display: inline-block;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 `
 // the parent of the coinList is App.js
 export default function CoinList(props) {
@@ -18,8 +18,8 @@ export default function CoinList(props) {
                 <th>Name</th>
                 <th>Ticker</th>
                 <th>Price</th>
-                {balance}
-                <th>Action</th>
+                <th>Balance</th>
+                <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +28,7 @@ export default function CoinList(props) {
                         key={key}
                         id={key}
                         handleRefresh={props.handleRefresh}
+                        handleTransaction={props.handleTransaction}
                         name={name}
                         ticker={ticker}
                         price={price}

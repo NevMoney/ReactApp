@@ -4,6 +4,8 @@ import AccountBalance from './components/AccountBalance/AccountBalance'
 import Header from './components/Header/Header'
 import styled from 'styled-components'
 import axios from 'axios'
+import 'bootswatch/dist/flatly/bootstrap.min.css'
+import '@fortawesome/fontawesome-free/js/all'
 
 const Div = styled.div`
   text-align: center;
@@ -12,12 +14,11 @@ const Div = styled.div`
 const coinDataUrl = 'https://api.coinpaprika.com/v1/coins'
 const coinTickerUrl = 'https://api.coinpaprika.com/v1/tickers/'
 const formatedPrice = (price) => parseFloat(Number(price).toFixed(4))
-const random = () => Math.floor(Math.random() * 100)
 
 function App(props) {
   // using react hooks
   const [balance, setBalance] = useState(10000)
-  const [showBalance, setShowBalance] = useState(true)
+  const [showBalance, setShowBalance] = useState(false)
   const [coinData, setCoinData] = useState([])
 
   const componentDidMount = async () => {
@@ -31,7 +32,7 @@ function App(props) {
         key: coin.id,
         name: coin.name,
         ticker: coin.symbol,
-        balance: random(),
+        balance: 0,
         price: formatedPrice(coin.quotes.USD.price),
       }
     })
@@ -70,6 +71,19 @@ function App(props) {
     setBalance((oldValue) => oldValue + 1200)
   }
 
+  const handleTransaction = (isBuy, changedTickerValue) => {
+    var balanceChange = isBuy ? 1 : -1
+    const newCoinData = coinData.map((values) => {
+      let newValues = { ...values }
+      if (changedTickerValue === values.key) {
+        newValues.balance += balanceChange
+        setBalance((oldBalance) => oldBalance - balanceChange * newValues.price)
+      }
+      return newValues
+    })
+    setCoinData(newCoinData)
+  }
+
   return (
     <Div className="App">
       <Header />
@@ -83,6 +97,7 @@ function App(props) {
         coinData={coinData}
         showBalance={showBalance}
         handleRefresh={handleRefresh}
+        handleTransaction={handleTransaction}
       />
     </Div>
   )

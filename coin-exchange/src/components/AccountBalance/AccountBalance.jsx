@@ -25,24 +25,50 @@ const Button = styled.button`
         color: white;
     }
 `
+// this allows for styling of the numbers to show up as currency
+var formated = Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+})
 
 export default function AccountBalance (props) {
     const buttonText = props.showBalance ? 'Hide Balance' : 'Show Balance'
     let balance = props.showBalance ?
-        <span>Cash Balance: ${props.amount}</span>
-        : null;
+        <span>Cash Balance: {props.amount}</span>
+        : '\u00A0';
+    
+    // '\u00A0' is a non-breaking space so that the page doesn't jump up and down as things are added and removed
     let helicopterMoney = null
+    // to add class to the button
+    // const buttonClass = 'btn ' + (props.showBalance ? 'btn-danger' : 'btn-info')
     
     if (props.showBalance) {
-        helicopterMoney = <Button onClick={props.addHelicopterMoney}>Money Printer Go Brrrr</Button>
+        helicopterMoney = <Button
+            onClick={props.addHelicopterMoney}
+            // then add class to the button
+            // className={buttonClass}
+        >
+            <i className="fas fa-money-bill-wave-alt"></i> Money Printer Go Brrrr
+        </Button>
+        // then implement formated to the balance amount
+        balance = <span>Cash Balance: {formated.format(props.amount)}</span>
     }
     
     return (
-        <Section>
-            {balance}
-            <Button onClick={props.handleBalanceVisibility}>{buttonText}</Button>
-            {helicopterMoney}
-        </Section>
+        <>
+            <Section>
+                {balance}
+            </Section>
+            <Section>
+                <Button
+                    onClick={props.handleBalanceVisibility}
+                    // className={buttonClass}
+                >
+                    {buttonText}
+                </Button>
+                {helicopterMoney}
+            </Section>
+        </>
     )
 }
 

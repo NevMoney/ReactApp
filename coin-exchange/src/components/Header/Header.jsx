@@ -9,14 +9,14 @@ const H1 = styled.h1`
 `
 
 const Img = styled.img`
-  height: 5rem;
+  height: 4rem;
   pointer-events: none;
   animation: App-logo-spin infinite 20s linear;
 `
 
 const AppHeader = styled.header`
   background-color: #282c34;
-  min-height: 20vh;
+  min-height: 15vh;
   display: flex;
   flex-direction: row;
   align-items: center;
