@@ -31,11 +31,17 @@ export default function AccountBalance (props) {
     let balance = props.showBalance ?
         <span>Account Balance: ${props.amount}</span>
         : null;
+    let helicopterMoney = null
+    
+    if (props.showBalance) {
+        helicopterMoney = <Button onClick={props.addHelicopterMoney}>Money Printer Go Brrrr</Button>
+    }
     
     return (
         <Section>
             {balance}
             <Button onClick={props.handleBalanceVisibility}>{buttonText}</Button>
+            {helicopterMoney}
         </Section>
     )
 }

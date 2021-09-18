@@ -42,6 +42,8 @@ function App(props) {
     // only load data if needed
     if (coinData.length === 0) {
       componentDidMount()
+    } else {
+      // componend did update
     }
   })
 
@@ -63,6 +65,11 @@ function App(props) {
     setShowBalance((oldValue) => !oldValue)
   }
 
+  // addHelicopterMoney is a const function that adds 1200 to the balance
+  const addHelicopterMoney = () => {
+    setBalance((oldValue) => oldValue + 1200)
+  }
+
   return (
     <Div className="App">
       <Header />
@@ -70,6 +77,7 @@ function App(props) {
         amount={balance}
         showBalance={showBalance}
         handleBalanceVisibility={handleBalanceVisibility}
+        addHelicopterMoney={addHelicopterMoney}
       />
       <CoinList
         coinData={coinData}
