@@ -12,6 +12,7 @@ const Div = styled.div`
 const coinDataUrl = 'https://api.coinpaprika.com/v1/coins'
 const coinTickerUrl = 'https://api.coinpaprika.com/v1/tickers/'
 const formatedPrice = (price) => parseFloat(Number(price).toFixed(4))
+const random = () => Math.floor(Math.random() * 100)
 
 function App(props) {
   // using react hooks
@@ -30,7 +31,7 @@ function App(props) {
         key: coin.id,
         name: coin.name,
         ticker: coin.symbol,
-        balance: 0,
+        balance: random(),
         price: formatedPrice(coin.quotes.USD.price),
       }
     })
